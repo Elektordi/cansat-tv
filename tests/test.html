@@ -1,0 +1,293 @@
+<html><head><title>CanSat-TV</title>
+<style>
+
+body {
+    background: black;
+    margin: 0px;
+    overflow: hidden;
+}
+
+.content {
+    position: relative;
+    width: 1024px;
+    height: 768px;
+    margin: auto;
+    background: #000042;
+    background-image:url('cansat_template.png');
+    color: #FFFFFF;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.page-temp {
+    position: absolute;
+    top: 600px;
+    width: 100%;
+    font-size: 64px;
+    font-weight:bold;
+    font-family: arial;
+    text-align: center;
+    text-decoration: blink;
+    visibility: hidden;
+}
+
+.page-fiche {
+    /*visibility: hidden;*/
+}
+
+.page-liste {
+    visibility: hidden;
+}
+
+.titre {
+    position: absolute;
+    left: 200px;
+    top: 40px;
+    width: 500px;
+    font-size: 64px;
+    font-weight:bold;
+    color: #c8ffff;
+    font-family: arial;
+    text-align: center;
+}
+
+.photo {
+    position: absolute;
+    left: 50px;
+    top: 220px;
+    width: 200px;
+    height: 200px;
+    border: 2px solid #FFFFFF;
+    box-shadow: 1px 1px 12px #FFFFFF;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+    overflow: hidden;
+    background: #FFFFFF;
+}
+
+.club {
+    position: absolute;
+    left: 300px;
+    top: 220px;
+    font-size: 64px;
+    
+}
+
+.projet {
+    position: absolute;
+    left: 300px;
+    top: 290px;
+    font-size: 64px;
+}
+
+.pays {
+    position: absolute;
+    left: 300px;
+    top: 360px;
+    font-size: 64px;
+}
+
+.etat {
+    position: absolute;
+    left: 0px;
+    top: 470px;
+    width: 100%;
+    text-align: center;
+    font-size: 64px;
+}
+
+.etat-att {
+    color: #808080;
+}
+
+.etat-ok {
+    color: #00FF00;
+}
+
+.etat-inte {
+    color: #FFFF00;
+}
+
+.etat-vol {
+    color: #FF0000;
+}
+
+.blink {
+    text-decoration: blink;
+}
+
+.categorie {
+    position: absolute;
+    left: 50px;
+    top: 580px;
+    font-size: 28px;
+}
+
+.vitesse {
+    position: absolute;
+    left: 50px;
+    top: 620px;
+    font-size: 28px;
+}
+
+.largueur {
+    position: absolute;
+    left: 50px;
+    top: 660px;
+    font-size: 28px;
+}
+
+.freq {
+    position: absolute;
+    left: 50px;
+    top: 700px;
+    font-size: 28px;
+}
+
+.missions {
+    position: absolute;
+    left: 580px;
+    top: 580px;
+    font-size: 28px;
+}
+
+.missions ul {
+    margin-top: 0px;
+}
+
+.liste {
+    position: absolute;
+    left: 20px;
+    top: 170px;
+    width: 984px;
+    height: 580px;
+    border-collapse: collapse;
+}
+
+.liste th {    
+    color: #FFFFFF;
+    font-size: 28px;
+}
+
+.liste td {    
+    color: #FFFFFF;
+    font-size: 28px;
+    border: 3px solid rgba(255, 255, 255, .5);
+    vertical-align: middle;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    max-height: 100px;
+}
+
+.liste td div {
+    max-height: 100px;
+    overflow: hidden;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    text-align: center;
+}
+
+td.c_photo {
+    width: 100px;
+    background: #FFFFFF;
+    padding-left: 0px !important;
+    padding-right: 0px !important;
+    margin-left: 0px !important;
+    margin-right: 0px !important;
+}
+
+td.c_club {
+    max-width: 300px;
+}
+
+td.c_projet {
+    max-width: 300px;
+}
+
+td.c_pays {
+    max-width: 100px;
+}
+
+td.c_etat {
+    max-width: 150px;
+    text-align: center;
+}
+
+
+
+
+</style>
+</head><body>
+
+    <div class="content" id="page-fiche">
+        <div class="titre">CanSat 2014</div>
+        <div class="page-temp">Connexion en cours...</div>
+        <div class="page-fiche">
+            <div class="photo"><img src="equipe2.gif" width="200"/></div>
+            <div class="club">Club: <span id="var-club">Sans Nom</span></div>
+            <div class="projet">Projet: <span id="var-projet">Sans titre 1</span></div>
+            <div class="pays">Pays: <span id="var-pays">France</span></div>
+            <div class="etat" id="var-etat"><span class="etat-vol">MONTÉE AÉRONEF...</span></div>
+            <div class="categorie">Catégorie: <span id="var-categorie">Internationale</span></div>
+            <div class="vitesse">Vitesse de descente: <span id="var-vitesse">4</span> m/s</div>
+            <div class="largueur">Largueur: <span id="var-largueur">PICA Jaune</span></div>
+            <div class="freq">Fréquence d'émission: <span id="var-freq">2.4 Ghz</span></div>
+            <div class="missions">Missions à réaliser: <br/>
+                <ul><span id="var-missions">
+                    <li>Atterrir sur Amandine</li>
+                    <li>Mesurer choc à l'impact</li>
+                </span></ul>
+            </div>
+        </div>
+        <div class="page-liste">
+            <table class="liste">
+                <tr>
+                    <th class="c_photo"><!-- Photo --></th>
+                    <th class="c_club">Club</th>
+                    <th class="c_projet">Projet</th>
+                    <th class="c_pays">Pays</th>
+                    <th class="c_etat">État</th>
+                </tr>
+                <tr>
+                    <td class="c_photo"><div id="c_1_photo"><img src="equipe2.gif" width="100"/></div></td>
+                    <td class="c_club"><div id="c_1_club">Sans Nom</div></td>
+                    <td class="c_projet"><div id="c_1_projet">Sans titre 1</div></td>
+                    <td class="c_pays"><div id="c_1_pays">France</div></td>
+                    <td class="c_etat"><div id="c_1_etat"><span class="etat-vol">Montée dans<br/>PICA Jaune</span></div></td>
+                </tr>
+                <tr>
+                    <td class="c_photo"><div id="c_2_photo"><img src="equipe2.gif" width="100"/></div></td>
+                    <td class="c_club"><div id="c_2_club">Sans Nom</div></td>
+                    <td class="c_projet"><div id="c_2_projet">Sans titre 2</div></td>
+                    <td class="c_pays"><div id="c_2_pays">France</div></td>
+                    <td class="c_etat"><div id="c_2_etat"><span class="etat-att">En attente</span></div></td>
+                </tr>
+                <tr>
+                    <td class="c_photo"><div id="c_3_photo"><img src="equipe2.gif" width="100"/></div></td>
+                    <td class="c_club"><div id="c_3_club">Sans Nom</div></td>
+                    <td class="c_projet"><div id="c_3_projet">Sans titre 3</div></td>
+                    <td class="c_pays"><div id="c_3_pays">France</div></td>
+                    <td class="c_etat"><div id="c_3_etat"><span class="etat-att">En attente</span></div></td>
+                </tr>
+                <tr>
+                    <td class="c_photo"><div id="c_4_photo"><img src="equipe2.gif" width="100"/></div></td>
+                    <td class="c_club"><div id="c_4_club">Sans Nom</div></td>
+                    <td class="c_projet"><div id="c_4_projet">Sans titre 4</div></td>
+                    <td class="c_pays"><div id="c_4_pays">France</div></td>
+                    <td class="c_etat"><div id="c_4_etat"><span class="etat-att">En attente</span></div></td>
+                </tr>
+                <tr>
+                    <td class="c_photo"><div id="c_5_photo"><img src="equipe2.gif" width="100"/></div></td>
+                    <td class="c_club"><div id="c_5_club">Sans Nom</div></td>
+                    <td class="c_projet"><div id="c_5_projet">Sans titre 5</div></td>
+                    <td class="c_pays"><div id="c_5_pays">France</div></td>
+                    <td class="c_etat"><div id="c_5_etat"><span class="etat-att">En attente</span></div></td>
+                </tr>
+            </table>
+        </div>
+    </div>    
+
+</body></html>
