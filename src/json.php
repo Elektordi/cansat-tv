@@ -19,7 +19,7 @@ foreach($aff as $a) {
     if($i==5) break;
 }
 
-$data = array( 'projets' => $out, 'ok' => 1, 'fini' => (count($out)==0) );
+$data = array( 'projets' => $out, 'ok' => 1, 'lock' => getConfig('lock', 0), 'fini' => (count($out)==0) );
 
 closedb();
 echo json_encode($data);

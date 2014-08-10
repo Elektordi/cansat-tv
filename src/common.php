@@ -87,10 +87,14 @@ function syncAffichage() {
         $i+=10;
     }
 
+    // HACK: Lock fait maison car sqlite 2 ne gère pas les transactions...
+    
+    setConfig('lock', 1);
     //querydb("BEGIN EXCLUSIVE TRANSACTION");
     querydb("DELETE FROM affichage");
     foreach($out as $q) querydb("INSERT INTO affichage VALUES ".$q.";");
     //querydb("COMMIT TRANSACTION");
+    setConfig('lock', 0);
 }
 
 function getLargueurs() {
@@ -134,7 +138,7 @@ function replaceDb($table, $fields, $id=null) {
     } else {
         $fields2 = array();
         foreach($fields as $f) {
-            if(empty($f)) {
+            if($f===null) {
                 $fields2[] = 'NULL';
             } elseif(is_numeric($f)) {
                 $fields2[] = $f;
