@@ -300,7 +300,7 @@ function tick() {
             $("#var-vitesse").html(data.projets[1].vitesse);
             $("#var-largueur").html(data.projets[1].largueur);
             $("#var-categorie").html(data.projets[1].categorie);
-            $("#var-missions").html("<li>"+data.projets[1].missions.replace("\n","</li><li>")+"</li>");
+            $("#var-missions").html("<li>"+data.projets[1].missions.replace(/\n/g,"</li><li>")+"</li>");
         //}
         
         if(critical) {

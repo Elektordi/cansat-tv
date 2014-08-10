@@ -122,7 +122,7 @@ function replaceDb($table, $fields, $id=null) {
             if(empty($f)) {
                 $f = 'NULL';
             } elseif(!is_numeric($value)) {
-                $f = "'".addslashes($f)."'";
+                $f = "'".sqlite_escape_string($f)."'";
             }
     
             if($i) $q.=', ';
@@ -139,7 +139,7 @@ function replaceDb($table, $fields, $id=null) {
             } elseif(is_numeric($f)) {
                 $fields2[] = $f;
             } else {
-                $fields2[] = "'".addslashes($f)."'";
+                $fields2[] = "'".sqlite_escape_string($f)."'";
             }
         }
         querydb("INSERT OR REPLACE INTO $table VALUES(".implode(",", $fields2).");");
@@ -154,13 +154,13 @@ function updateDb($table, $field, $value, $id) {
     if(empty($value)) {
         $value = 'NULL';
     } elseif(!is_numeric($value)) {
-        $value = "'".addslashes($value)."'";
+        $value = "'".sqlite_escape_string($value)."'";
     }
     querydb("UPDATE $table SET $field = $value WHERE rowid=".($id+0).";");
 }
 
 function getConfig($key, $default=null) {
-    $r = querydb("SELECT value FROM config WHERE key LIKE '".addslashes($key)."';");
+    $r = querydb("SELECT value FROM config WHERE key LIKE '".sqlite_escape_string($key)."';");
     $a = sqlite_fetch_array($r, SQLITE_ASSOC);
     if(!$a) return $default;
     return $a['value'];
