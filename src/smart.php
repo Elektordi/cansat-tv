@@ -66,7 +66,7 @@ if(!installed()) die("ERROR");
                     foreach($largueurs as $e) {
                         echo "<option value='".$e."' ".($e==$l['largueur']?"selected='1'":'').">".$e."</option>";
                     } ?>
-                </select></td>
+                </select></form></td>
             </tr>
             <?php
         }

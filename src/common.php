@@ -106,7 +106,7 @@ function getEtats() {
 }
 
 function getEtatsStyle() {
-    return array('att', 'jaune', 'jaune blink', 'rouge', 'rouge blink', 'rouge', 'vert blink', 'vert');
+    return array('att', 'jaune', 'jaune', 'rouge', 'rouge blink', 'rouge', 'vert blink', 'vert');
 }
 
 function getEtatsCrit() {

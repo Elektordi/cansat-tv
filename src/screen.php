@@ -258,7 +258,7 @@ function tick() {
             $( ".sync-err" ).show();
             return;
         }
-        if(data.lock) return; // HACK
+        if(data.lock==1) return; // HACK
         
         if(data.fini) {
                 $( ".page-temp" ).html("Campagne terminée !");
