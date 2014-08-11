@@ -105,7 +105,7 @@ body {
 }
 
 .etat-att {
-    color: #808080;
+    color: #A0A0A0;
 }
 
 .etat-vert {

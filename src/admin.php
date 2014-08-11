@@ -45,8 +45,8 @@ if(isset($_GET['mode'])) $mode = $_GET['mode'];
         $clubs = getClubs();
         $limite = time()-$delai_fin;
         ?>
-        <p align="center">Contrôle en direct de l'affichage:</p>
-        <p align="center"><i>Les lignes en gris sont terminés depuis plus de <?php echo $delai_fin/60; ?> minute(s) et ont disparues de l'affichage public.</i></p>
+        <p align="center"><b>Contrôle en direct de l'affichage:</b></p>
+        <p align="center"><i>Les lignes en gris sont les projets terminés depuis plus de <?php echo $delai_fin/60; ?> minute(s) et ont disparues de l'affichage public.</i></p>
         <table border="1" align="center" width="75%">
             <tr>
                 <th>Nom projet</th>
