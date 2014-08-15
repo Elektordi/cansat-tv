@@ -1,6 +1,6 @@
 <?php
 
-$delai_fin = 60;
+$delai_fin = 30;
 
 $dbfile = 'db/cansat.db';
 $dbhandle = null;
@@ -98,15 +98,15 @@ function getLargueurs() {
 }
 
 function getEtats() {
-    return array('En attente', 'Préparation', 'Intégré dans largueur', 'Montée aéronef', 'Prêt pour lâcher', 'Lâcher', 'Récupération', 'Mission terminée');
+    return array('En attente', 'Préparation', 'Intégré dans largueur', 'Montée aérostat', 'Prêt pour largage', 'Récupération', 'Mission terminée');
 }
 
 function getEtatsStyle() {
-    return array('att', 'jaune', 'jaune', 'rouge', 'rouge blink', 'rouge', 'vert blink', 'vert');
+    return array('att', 'jaune', 'jaune', 'rouge', 'rouge blink', 'vert blink', 'vert');
 }
 
 function getEtatsCrit() {
-    return array(0,0,0,0,1,1,0,0);
+    return array(0,0,0,1,1,0,0);
 }
 
 function replaceDb($table, $fields, $id=null) {
