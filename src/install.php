@@ -19,7 +19,7 @@ if(isset($vp) && $vp) {
     if(version_compare($vp, '5.2', '>')) {
         echo "<p>PHP version $vp présent $ok</p>";
     } else {
-        echo "<p>PHP version $vp or version 2 nécessaire $ko</p>";
+        die("<p>PHP version $vp or version 2 nécessaire $ko</p>");
     }
 } else {
      die("<p>PHP version trop ancienne $ko</p></body></html>");
@@ -28,10 +28,10 @@ if(isset($vp) && $vp) {
 
 /*if(function_exists('SQLite3::version'))*/ $vs = SQLite3::version();
 if(isset($vs) && $vs) {
-    if(preg_match("/^3\.7\./", $vs['versionString'])) {
+    if(preg_match("/^3\./", $vs['versionString'])) {
         echo "<p>SQLite version ".$vs['versionString']." présent $ok</p>";
     } else {
-        echo "<p>SQLite version ".$vs['versionString']." or version 3.7.* nécessaire $ko</p>";
+        die("<p>SQLite version ".$vs['versionString']." or version 3.* nécessaire $ko</p>");
     }
 } else {
      die("<p>SQLite absent $ko</p></body></html>");
