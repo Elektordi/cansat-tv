@@ -13,3 +13,27 @@ What is CanSat?
 The CNES and Planète Sciences organize the CANSAT competition in France.
 
 More informations: http://www.planete-sciences.org/espace/-CanSat-?lang=en
+
+Example screenshots
+===================
+
+**Team screen:**
+
+![Screenshot 1](https://raw.githubusercontent.com/Elektordi/cansat-tv/master/screenshots/fiche.jpg)
+
+**Team list:**
+
+![Screenshot 2](https://raw.githubusercontent.com/Elektordi/cansat-tv/master/screenshots/liste.jpg)
+
+**Admin page:**
+
+![Screenshot 3](https://raw.githubusercontent.com/Elektordi/cansat-tv/master/screenshots/admin.jpg)
+
+**Simple admin page for smartphones:**
+
+![Screenshot 4](https://raw.githubusercontent.com/Elektordi/cansat-tv/master/screenshots/smartphone.jpg)
+
+Is it only in French?
+=====================
+
+Yes, sorry...
