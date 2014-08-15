@@ -125,6 +125,7 @@ if(isset($_GET['mode'])) $mode = $_GET['mode'];
                 <th>Image</th>
             </tr>
             <?php
+			$le = array();
             foreach($e as $l) {
                 $color='white';
                 if(isset($_GET['edit']) && $_GET['edit']==$l['rowid']) {
@@ -171,6 +172,7 @@ if(isset($_GET['mode'])) $mode = $_GET['mode'];
                 $files = scandir('equipes/');
                 foreach($files as $f) {
                     if(substr($f,0,1)=='.') continue;
+					if($f=='Thumbs.db') continue;
                     echo "<option value='".$f."' ".($f==$le['image']?"selected='1'":'').">".$f."</option>";
                 } ?>
             </select></p>
@@ -192,6 +194,7 @@ if(isset($_GET['mode'])) $mode = $_GET['mode'];
                 <th>Pays d'origine</th>
             </tr>
             <?php
+			$le = array();
             foreach($e as $l) {
                 $color='white';
                 if(isset($_GET['edit']) && $_GET['edit']==$l['rowid']) {

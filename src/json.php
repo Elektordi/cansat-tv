@@ -14,6 +14,7 @@ foreach($aff as $a) {
 
     if($p['etat']=='') $p['etat'] = "En attente";
     if($p['largueur']=='') $p['largueur'] = "Inconnu";
+	if($p['image']=='') $p['image']='../images/blank.gif'; // HACK
     
     $out[$i++] = $p;
     if($i==5) break;
