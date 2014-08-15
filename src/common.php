@@ -16,10 +16,10 @@ function installed() {
 
 function querydb($q) {
     global $dbhandle, $dbfile;
-    if(!$dbhandle) $dbhandle = sqlite_open($dbfile, 0666, $error);
+    if(!$dbhandle) $dbhandle = new SQLite3($dbfile);
     if(!$dbhandle) die();
     //var_dump($q);
-    $r = sqlite_query($dbhandle, $q);
+    $r = $dbhandle->query($q);
     
     if(!$r) die(); //sqlite_error_string
     return $r;
@@ -28,13 +28,13 @@ function querydb($q) {
 function closedb() {
     global $dbhandle;
     if(!$dbhandle) return;
-    sqlite_close($dbhandle);
+    $dbhandle->close();
 }
 
 function getProjets() {
     $liste = array();
     $r = querydb("SELECT rowid,* FROM projets;");
-    while($a = sqlite_fetch_array($r, SQLITE_ASSOC)) {
+    while($a = $r->fetchArray(SQLITE3_ASSOC)) {
         $liste[$a['rowid']] = $a;
     }
     return $liste;
@@ -43,7 +43,7 @@ function getProjets() {
 function getClubs() {
     $liste = array();
     $r = querydb("SELECT rowid,* FROM clubs;");
-    while($a = sqlite_fetch_array($r, SQLITE_ASSOC)) {
+    while($a = $r->fetchArray(SQLITE3_ASSOC)) {
         $liste[$a['rowid']] = $a;
     }
     return $liste;
@@ -54,7 +54,7 @@ function getAffichage($marge = null) {
     $where = 1;
     if($marge!==null) $where = "fin > ".(time()-$marge);
     $r = querydb("SELECT rowid,* FROM affichage WHERE $where OR fin=0 ORDER BY ordre ASC;");
-    while($a = sqlite_fetch_array($r, SQLITE_ASSOC)) {
+    while($a = $r->fetchArray(SQLITE3_ASSOC)) {
         $liste[$a['rowid']] = $a;
     }
     return $liste;
@@ -87,14 +87,10 @@ function syncAffichage() {
         $i+=10;
     }
 
-    // HACK: Lock fait maison car sqlite 2 ne gère pas les transactions...
-    
-    setConfig('lock', 1);
-    //querydb("BEGIN EXCLUSIVE TRANSACTION");
+    querydb("BEGIN EXCLUSIVE TRANSACTION");
     querydb("DELETE FROM affichage");
     foreach($out as $q) querydb("INSERT INTO affichage VALUES ".$q.";");
-    //querydb("COMMIT TRANSACTION");
-    setConfig('lock', 0);
+    querydb("COMMIT TRANSACTION");
 }
 
 function getLargueurs() {
@@ -119,14 +115,14 @@ function replaceDb($table, $fields, $id=null) {
         if(!$r) return;
         $q = "UPDATE $table SET ";
         $i=0;
-        while($a = sqlite_fetch_array($r, SQLITE_ASSOC)) {
+        while($a = $r->fetchArray(SQLITE3_ASSOC)) {
             if(isset($fields[$a['name']])) $f = $fields[$a['name']];
             else $f = $fields[$i];
     
             if(empty($f)) {
                 $f = 'NULL';
-            } elseif(!is_numeric($value)) {
-                $f = "'".sqlite_escape_string($f)."'";
+            } elseif(!is_numeric($f)) {
+                $f = "'".SQLite3::escapeString($f)."'";
             }
     
             if($i) $q.=', ';
@@ -143,7 +139,7 @@ function replaceDb($table, $fields, $id=null) {
             } elseif(is_numeric($f)) {
                 $fields2[] = $f;
             } else {
-                $fields2[] = "'".sqlite_escape_string($f)."'";
+                $fields2[] = "'".SQLite3::escapeString($f)."'";
             }
         }
         querydb("INSERT OR REPLACE INTO $table VALUES(".implode(",", $fields2).");");
@@ -158,14 +154,14 @@ function updateDb($table, $field, $value, $id) {
     if(empty($value)) {
         $value = 'NULL';
     } elseif(!is_numeric($value)) {
-        $value = "'".sqlite_escape_string($value)."'";
+        $value = "'".SQLite3::escapeString($value)."'";
     }
     querydb("UPDATE $table SET $field = $value WHERE rowid=".($id+0).";");
 }
 
 function getConfig($key, $default=null) {
-    $r = querydb("SELECT value FROM config WHERE key LIKE '".sqlite_escape_string($key)."';");
-    $a = sqlite_fetch_array($r, SQLITE_ASSOC);
+    $r = querydb("SELECT value FROM config WHERE key LIKE '".SQLite3::escapeString($key)."';");
+    $a = $r->fetchArray(SQLITE3_ASSOC);
     if(!$a) return $default;
     return $a['value'];
 }

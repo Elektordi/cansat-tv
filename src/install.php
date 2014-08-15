@@ -26,43 +26,42 @@ if(isset($vp) && $vp) {
 }
 
 
-if(function_exists('sqlite_libversion')) $vs = sqlite_libversion();
-
+/*if(function_exists('SQLite3::version'))*/ $vs = SQLite3::version();
 if(isset($vs) && $vs) {
-    if(preg_match("/^2\./", $vs)) {
-        echo "<p>SQLite version $vs présent $ok</p>";
+    if(preg_match("/^3\.7\./", $vs['versionString'])) {
+        echo "<p>SQLite version ".$vs['versionString']." présent $ok</p>";
     } else {
-        echo "<p>SQLite version $vs or version 2 nécessaire $ko</p>";
+        echo "<p>SQLite version ".$vs['versionString']." or version 3.7.* nécessaire $ko</p>";
     }
 } else {
      die("<p>SQLite absent $ko</p></body></html>");
 }
 
-$dbhandle = @sqlite_open($dbfile, 0666, $error);
+$dbhandle = new SQLite3($dbfile);
 if (!$dbhandle) die("<p>Impossible de créer $dbfile ($error) $ko</p></body></html>");
 echo "<p>Base $dbfile crée $ok</p>";
 
 $stm = "CREATE TABLE config(key TEXT PRIMARY KEY, value TEXT NOT NULL)";
-$q = @sqlite_exec($dbhandle, $stm, $error);
-if (!$q) die("<p>Impossible de créer la table 'config' ($error) $ko</p></body></html>");
+$q = $dbhandle->exec($stm);
+if (!$q) die("<p>Impossible de créer la table 'config' $ko</p></body></html>");
 echo "<p>Table 'config' crée $ok</p>";
 
 $stm = "CREATE TABLE projets(nom TEXT NOT NULL, club INTEGER NOT NULL, etat TEXT, categorie TEXT, vitesse TEXT, largueur TEXT, freq TEXT, missions TEXT, image TEXT)";
-$q = @sqlite_exec($dbhandle, $stm, $error);
-if (!$q) die("<p>Impossible de créer la table 'projets' ($error) $ko</p></body></html>");
+$q = $dbhandle->exec($stm);
+if (!$q) die("<p>Impossible de créer la table 'projets' $ko</p></body></html>");
 echo "<p>Table 'projets' crée $ok</p>";
 
 $stm = "CREATE TABLE clubs(nom TEXT NOT NULL, ville TEXT, pays TEXT)";
-$q = @sqlite_exec($dbhandle, $stm, $error);
-if (!$q) die("<p>Impossible de créer la table 'clubs' ($error) $ko</p></body></html>");
+$q = $dbhandle->exec($stm);
+if (!$q) die("<p>Impossible de créer la table 'clubs' $ko</p></body></html>");
 echo "<p>Table 'clubs' crée $ok</p>";
 
 $stm = "CREATE TABLE affichage(projet INTEGER NOT NULL, ordre INTEGER NOT NULL, fin INTEGER)";
-$q = @sqlite_exec($dbhandle, $stm, $error);
-if (!$q) die("<p>Impossible de créer la table 'affichage' ($error) $ko</p></body></html>");
+$q = $dbhandle->exec($stm);
+if (!$q) die("<p>Impossible de créer la table 'affichage' $ko</p></body></html>");
 echo "<p>Table 'affichage' crée $ok</p>";
 
-sqlite_close($dbhandle);
+$dbhandle->close();
 
 //$_SESSION['cansat_admin'] = 1;
 
